@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+
+using System.Text;
+using System.Windows.Forms;
+using RaidTheCageCtrl;
+using WiseGuys;
+using WiseGuys.configs;
+
+namespace WiseGuys.Settings
+{
+    public partial class ucGeneralSettings : UserControl
+    {
+        private MainForm mParent;
+        private SettingsEditor mSetParent;
+        private bool mChanged = false;
+        
+        private bool IsUpdating = false;
+
+       
+
+        public ucGeneralSettings(MainForm pParent, SettingsEditor pSetParent)
+        {
+            if (pSetParent != null)
+            {
+                mSetParent = pSetParent;
+                mSetParent.OnFormClosingMsg += OnFormClosingMsg;
+            }
+            mParent = pParent;
+            InitializeComponent();                       
+
+
+            UpdateDlg();
+        }
+
+        private void OnFormClosingMsg(object sender)
+        {
+            if (mChanged)
+            {
+                // save...
+                mSetParent.mChanged[(int)ESettingsForms.Connections] = true;
+                generalsettings.WriteXmlConfig(mParent.ExePath);
+            }
+        }
+
+       
+
+        private void UpdateDlg()
+        {
+            IsUpdating = true;
+
+
+            tbgensettingscurrencysign.Text = generalsettings.mCurrencysign;
+
+        
+            IsUpdating = false;
+        }
+
+
+        private void tbgensettingscurrencysign_TextChanged(object sender, EventArgs e)
+        {
+            if (!IsUpdating)
+            {
+                generalsettings.mCurrencysign = tbgensettingscurrencysign.Text;
+                mChanged = true;
+            }
+        }
+
+       
+
+                               
+    }
+
+    public static class generalsettings
+    {
+        private static IProfile m_profile;
+
+
+        public static string mCurrencysign;
+
+        public static void ReadXmlConfig(string inPath)
+        {
+
+            // read the xml file with all defaults.......
+            m_profile = new Xml();
+
+            m_profile.Name = inPath + "\\ConfigFiles\\GeneralSettings.xml";
+          
+
+            mCurrencysign = m_profile.GetValue("GeneralSettings", "Currencysign", "$");
+
+        }
+
+        public static void WriteXmlConfig(string inPath)
+        {
+            // read the xml file with all defaults.......
+            m_profile = new Xml();
+
+            m_profile.Name = inPath + "\\ConfigFiles\\GeneralSettings.xml";
+
+          
+
+            m_profile.SetValue("GeneralSettings", "Currencysign", mCurrencysign);
+
+        }
+    }
+}

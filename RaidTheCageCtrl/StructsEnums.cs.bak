@@ -1,0 +1,68 @@
+﻿using System;
+
+public enum eCountries
+{
+    UK = 0,  
+    TURKEY = 1,
+    RUSSIA = 2,
+    ROMANIA = 3,
+    ARGENTINA = 4,
+
+};
+
+public enum eStackTypes : int
+{
+    Main = 0,
+    Switch = 1,    
+}
+
+public enum eLanguage : int
+{
+    ENGLISH = 0,
+    SECONDLANGUAGE,
+    SECONDLANGUAGEENGLISH,
+};
+
+public enum eSortItems
+{
+    RANDOM,
+    HIGHTOLOW,
+    LOWTOHIGH,
+}
+
+
+public enum eEngines : int
+{
+    OVERLAY = 0,
+    PROJECTOR = 1,            
+    WISEQ = 2,
+    WISEAUDIO = 3,
+    HOST = 4,
+    CAGE = 5,
+    HOSTMESSAGING = 6,      // will be a socketdeamon!  // so port to listen on only
+    MIDI = 7,
+    EXTRAQA = 8,
+    MAX = 9,
+};
+
+
+[Flags]
+public enum ButtonStates : uint
+{
+    NONE = 0,
+    MAYCONTINUE = 1, // Bit 0
+    MAYTRUE = 2, // Bit 1
+    MAYRESET = 2, // call game instead of studio game
+    MAYFALSE = 4, // Bit 2
+    MAYREVEAL = 4, // Bit 2 call game instead of studio game
+    MAYTIMEOUT = 8, // Bit 3
+    MAYSTEPFORWARD = 16, // Bit 4
+    
+    
+}
+
+public enum SoundCommands : int
+{
+    PLAY,
+    STOP,
+}
