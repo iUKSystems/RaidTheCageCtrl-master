@@ -215,6 +215,7 @@ namespace RaidTheCageCtrl
                             case 2:
                                 messageboxstring = "This license is not for this product!";
                                 break;
+                            // JPB This is a test change, removing redundant code...
                             //case 3:
                             //    messageboxstring = "This license end date is shorter then the current end date!";
                             //    break;
